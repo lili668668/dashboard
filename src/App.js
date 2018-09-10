@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Card from '@material-ui/core/Card'
@@ -9,7 +8,10 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import randomCharts from './utils/random_charts'
+import randomWords from './utils/random_words'
 import { axises } from './utils/constants'
+import WordCloud from './components/WordCloud'
+import Charts from './components/Charts'
 import './App.css'
 
 class App extends Component {
@@ -18,7 +20,8 @@ class App extends Component {
     this.state = {
       leftAxis: 'cpc',
       rightAxis: 'cost',
-      charts: randomCharts()
+      charts: randomCharts(),
+      words: randomWords()
     }
   }
 
@@ -26,16 +29,31 @@ class App extends Component {
     this.setState((state, props) => ({ ...state, charts: randomCharts() }))
   }
 
+  handleWordsRandom () {
+    this.setState((state, props) => ({ ...state, words: randomWords() }))
+  }
+
   handleAxisChange (axisId, value) {
     this.setState((state, props) => ({ ...state, [axisId]: value }))
   }
 
   render () {
-    const { leftAxis, rightAxis, charts } = this.state
+    const { leftAxis, rightAxis, charts, words } = this.state
     return (
       <div className="pool">
-        <Card className="card">
-          <AppBar className="appBar" position="static">
+        <Card className="card-half">
+          <AppBar className="cloud" position="static">
+            <Toolbar>
+              <h1>Word Cloud</h1>
+              <IconButton onClick={() => this.handleWordsRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <WordCloud words={words} />
+        </Card>
+        <Card className="card-full">
+          <AppBar className="charts" position="static">
             <Toolbar>
               <h1>Charts</h1>
               <IconButton onClick={() => this.handleChartRandom()}>
@@ -73,18 +91,7 @@ class App extends Component {
               </Toolbar>
             </AppBar>
           </div>
-          <ResponsiveContainer height={300} width={700}>
-            <LineChart data={charts} margin={{ left: 50, right: 50, top: 30, bottom: 30 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="hour" />
-              <YAxis yAxisId={leftAxis} orientation="left" label={{ value: axises.find(axis => axis.value === leftAxis).label, position: 'left', offset: -10 }} />
-              <YAxis yAxisId={rightAxis} orientation="right" label={{ value: axises.find(axis => axis.value === rightAxis).label, position: 'right', offset: -10 }} />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" yAxisId={leftAxis} dataKey={leftAxis} stroke="#FFA726" fill="#FFB74D" />
-              <Line type="monotone" yAxisId={rightAxis} dataKey={rightAxis} stroke="#2196F3" fill="#42A5F5" />
-            </LineChart>
-          </ResponsiveContainer>
+          <Charts leftAxis={leftAxis} rightAxis={rightAxis} charts={charts} />
         </Card>
       </div>
     );

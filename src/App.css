@@ -1,4 +1,4 @@
-.appBar {
+.charts {
   background: #FF5722 !important;
   color: #ffffff;
   overflow: hidden;
@@ -8,17 +8,42 @@
   box-shadow: none !important;
 }
 
-.appBar > div {
+.charts > div {
   display: flex;
   flex-direction: row;
   flex: 1;
 }
 
-.appBar h1 {
+.charts h1 {
   flex: 1 1 auto;
 }
 
-.appBar button {
+.charts button {
+  flex: 0 0 auto;
+  color: #ffffff;
+}
+
+.cloud {
+  background: #F44336 !important;
+  color: #ffffff;
+  overflow: hidden;
+  font-size: 10px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: none !important;
+}
+
+.cloud > div {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.cloud h1 {
+  flex: 1 1 auto;
+}
+
+.cloud button {
   flex: 0 0 auto;
   color: #ffffff;
 }
@@ -45,8 +70,12 @@
   background-color: #fafafa;
 }
 
-.card {
-  width: 700px;
+.card-half {
+  width: 50%;
+}
+
+.card-full {
+  width: 100%;
 }
 
 .selector {
