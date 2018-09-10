@@ -1,28 +1,54 @@
-.App {
-  text-align: center;
+.appBar {
+  background: #FF5722 !important;
+  color: #ffffff;
+  overflow: hidden;
+  font-size: 10px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: none !important;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.appBar > div {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.appBar h1 {
+  flex: 1 1 auto;
 }
 
-.App-title {
-  font-size: 1.5em;
+.appBar button {
+  flex: 0 0 auto;
+  color: #ffffff;
 }
 
-.App-intro {
-  font-size: large;
+.menuBar {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.menuOne {
+  background: #FFE0B2 !important;
+  flex: 1 1 auto !important;
+  box-shadow: none !important;
+}
+
+.menuTwo {
+  background: #BBDEFB !important;
+  flex: 1 1 auto !important;
+  box-shadow: none !important;
+}
+
+.pool {
+  background-color: #fafafa;
+}
+
+.card {
+  width: 700px;
+}
+
+.selector {
+  flex: 1 1 auto;
 }

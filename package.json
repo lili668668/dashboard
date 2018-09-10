@@ -4,10 +4,18 @@
   "private": true,
   "homepage": "https://lili668668.github.io/docomo-poinko-textmaker",
   "dependencies": {
+    "@material-ui/core": "^3.0.3",
+    "@material-ui/icons": "^3.0.1",
+    "chart.js": "^1.1.1",
     "gh-pages": "^1.2.0",
+    "material-design-icons": "^3.0.1",
     "react": "^16.4.1",
+    "react-chartjs-2": "^2.7.4",
+    "react-d3-cloud": "^0.6.0",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-toolbox": "^2.0.0-beta.13",
+    "recharts": "^1.2.0"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -16,6 +24,24 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dev": "PORT=4956 npm start"
+    "dev": "PORT=4956 npm start",
+    "toolbox": "react-toolbox-themr"
+  },
+  "devDependencies": {
+    "react-toolbox-themr": "^1.0.2"
+  },
+  "reactToolbox": {
+    "include": [
+      "BUTTON",
+      "DATE_PICKER"
+    ],
+    "customProperties": {
+      "animation-duration": "0.3s",
+      "color-accent": "var(--palette-pink-a200)",
+      "color-accent-dark": "var(--palette-pink-700)",
+      "color-primary-contrast": "var(--color-dark-contrast)",
+      "color-accent-contrast": "var(--color-dark-contrast)"
+    },
+    "output": "assets/react-toolbox"
   }
 }
