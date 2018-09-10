@@ -7,8 +7,10 @@ import RefreshIcon from '@material-ui/icons/Refresh'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import ReactSpeedometer from "react-d3-speedometer"
 import randomCharts from './utils/random_charts'
 import randomWords from './utils/random_words'
+import random from './utils/random'
 import { axises } from './utils/constants'
 import WordCloud from './components/WordCloud'
 import Charts from './components/Charts'
@@ -42,7 +44,7 @@ class App extends Component {
     return (
       <div className="pool">
         <Card className="card-half">
-          <AppBar className="cloud" position="static">
+          <AppBar className="cloud appBar" position="static">
             <Toolbar>
               <h1>Word Cloud</h1>
               <IconButton onClick={() => this.handleWordsRandom()}>
@@ -52,8 +54,26 @@ class App extends Component {
           </AppBar>
           <WordCloud words={words} />
         </Card>
+        <Card className="card-quarter">
+          <AppBar className="sppedomater appBar" position="static">
+            <Toolbar>
+              <h1>Word Cloud</h1>
+              <IconButton onClick={() => this.handleWordsRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <ReactSpeedometer
+            value={random(0, 100)}
+            minValue={0}
+            maxValue={100}
+            segments={5}
+            fluidWidth={true}
+            needleTransitionDuration={3000}
+          />
+        </Card>
         <Card className="card-full">
-          <AppBar className="charts" position="static">
+          <AppBar className="charts appBar" position="static">
             <Toolbar>
               <h1>Charts</h1>
               <IconButton onClick={() => this.handleChartRandom()}>

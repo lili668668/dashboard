@@ -1,5 +1,4 @@
-.charts {
-  background: #FF5722 !important;
+.appBar {
   color: #ffffff;
   overflow: hidden;
   font-size: 10px;
@@ -8,44 +7,31 @@
   box-shadow: none !important;
 }
 
-.charts > div {
+.appBar > div {
   display: flex;
   flex-direction: row;
   flex: 1;
 }
 
-.charts h1 {
+.appBar h1 {
   flex: 1 1 auto;
 }
 
-.charts button {
+.appBar button {
   flex: 0 0 auto;
   color: #ffffff;
+}
+
+.charts {
+  background: #FF5722 !important;
 }
 
 .cloud {
   background: #F44336 !important;
-  color: #ffffff;
-  overflow: hidden;
-  font-size: 10px;
-  display: flex;
-  flex-direction: row;
-  box-shadow: none !important;
 }
 
-.cloud > div {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-}
-
-.cloud h1 {
-  flex: 1 1 auto;
-}
-
-.cloud button {
-  flex: 0 0 auto;
-  color: #ffffff;
+.sppedomater {
+  background: #B71C1C !important;
 }
 
 .menuBar {
@@ -66,8 +52,8 @@
   box-shadow: none !important;
 }
 
-.pool {
-  background-color: #fafafa;
+.card-quarter {
+  width: 25%;
 }
 
 .card-half {
@@ -80,4 +66,11 @@
 
 .selector {
   flex: 1 1 auto;
+}
+
+.pool {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #fafafa;
 }
