@@ -1,8 +1,8 @@
 {
-  "name": "docomo-poinko-textmaker",
+  "name": "dashboard",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lili668668.github.io/docomo-poinko-textmaker",
+  "homepage": "https://lili668668.github.io/dashboard",
   "dependencies": {
     "@material-ui/core": "^3.0.3",
     "@material-ui/icons": "^3.0.1",
@@ -24,24 +24,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dev": "PORT=4956 npm start",
-    "toolbox": "react-toolbox-themr"
-  },
-  "devDependencies": {
-    "react-toolbox-themr": "^1.0.2"
-  },
-  "reactToolbox": {
-    "include": [
-      "BUTTON",
-      "DATE_PICKER"
-    ],
-    "customProperties": {
-      "animation-duration": "0.3s",
-      "color-accent": "var(--palette-pink-a200)",
-      "color-accent-dark": "var(--palette-pink-700)",
-      "color-primary-contrast": "var(--color-dark-contrast)",
-      "color-accent-contrast": "var(--color-dark-contrast)"
-    },
-    "output": "assets/react-toolbox"
+    "dev": "PORT=4956 npm start"
   }
 }
