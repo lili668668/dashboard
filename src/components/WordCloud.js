@@ -8,7 +8,7 @@ class App extends Component {
       <WordCloud
         data={words}
         height={300}
-        width={400}
+        width={800}
       />
     );
   }

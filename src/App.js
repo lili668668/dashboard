@@ -16,8 +16,6 @@ import randomPopulation from './utils/random_population'
 import faker from 'faker'
 import randomTendency from './utils/random_tendency'
 import { axises } from './utils/constants'
-import Tendency from './components/Tendency'
-import Impression from './components/Impression'
 import Optimized from './components/Optimized'
 import WordCloud from './components/WordCloud'
 import Population from './components/Population'
@@ -31,11 +29,11 @@ class App extends Component {
     this.state = {
       name: faker.lorem.slug(),
       active: faker.random.boolean(),
-      leftAxis: 'cpc',
-      rightAxis: 'cost',
+      axis: 'cpc',
       charts: randomCharts(),
       words: randomWords(),
-      population: randomPopulation(),
+      nowPopulation: randomPopulation(),
+      futurePopulation: randomPopulation(),
       tendency: randomTendency(),
       impression: Math.round(random(50, 100)),
       optimized: Math.round(random(50, 100))
@@ -55,27 +53,19 @@ class App extends Component {
   }
 
   handlePopulationRandom () {
-    this.setState((state, props) => ({ ...state, population: randomPopulation() }))
-  }
-
-  handleTendencyRandom () {
-    this.setState((state, props) => ({ ...state, tendency: randomTendency() }))
-  }
-
-  handleImpressionRandom () {
-    this.setState((state, props) => ({ ...state, impression: Math.round(random(50, 100)) }))
+    this.setState((state, props) => ({ ...state, nowPopulation: randomPopulation(), futurePopulation: randomPopulation() }))
   }
 
   handleOptimizedRandom () {
     this.setState((state, props) => ({ ...state, optimized: Math.round(random(50, 100)) }))
   }
 
-  handleAxisChange (axisId, value) {
-    this.setState((state, props) => ({ ...state, [axisId]: value }))
+  handleAxisChange (value) {
+    this.setState((state, props) => ({ ...state, axis: value }))
   }
 
   render () {
-    const { name, active, leftAxis, rightAxis, charts, words, population, tendency, impression, optimized } = this.state
+    const { name, active, axis, charts, words, nowPopulation, futurePopulation, optimized } = this.state
     return (
       <div className="pool">
         <Card className="card card-quarter">
@@ -100,32 +90,6 @@ class App extends Component {
           </List>
         </Card>
         <Card className="card card-quarter">
-          <AppBar className="tendency appBar" position="static">
-            <Toolbar>
-              <h1>Delivery Tendency</h1>
-              <IconButton onClick={() => this.handleTendencyRandom()}>
-                <RefreshIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <Tendency tendency={tendency} />
-        </Card>
-        <Card className="card card-quarter">
-          <AppBar className="impression-rate appBar" position="static">
-            <Toolbar>
-              <h1>Impression Rate</h1>
-              <IconButton onClick={() => this.handleImpressionRandom()}>
-                <RefreshIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <div className="card-content">
-            <div className="circle-container">
-              <Impression impression={impression} />
-            </div>
-          </div>
-        </Card>
-        <Card className="card card-quarter">
           <AppBar className="optimized appBar" position="static">
             <Toolbar>
               <h1>Optimize Effectiveness</h1>
@@ -140,32 +104,21 @@ class App extends Component {
             </div>
           </div>
         </Card>
-        <Card className="card card-quarter">
+        <Card className="card card-half">
           <AppBar className="population-group appBar" position="static">
             <Toolbar>
-              <h1>Population Group</h1>
+              <h1>Population Campare Pie</h1>
               <IconButton onClick={() => this.handlePopulationRandom()}>
                 <RefreshIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
-          <PopulationGroup population={population} />
+          <PopulationGroup nowPopulation={nowPopulation} futurePopulation={futurePopulation} />
         </Card>
         <Card className="card card-half">
-          <AppBar className="population appBar" position="static">
-            <Toolbar>
-              <h1>Population</h1>
-              <IconButton onClick={() => this.handlePopulationRandom()}>
-                <RefreshIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <Population population={population} />
-        </Card>
-        <Card className="card card-quarter">
           <AppBar className="cloud appBar" position="static">
             <Toolbar>
-              <h1>Word Cloud</h1>
+              <h1>Suggest Word</h1>
               <IconButton onClick={() => this.handleWordsRandom()}>
                 <RefreshIcon />
               </IconButton>
@@ -173,10 +126,21 @@ class App extends Component {
           </AppBar>
           <WordCloud words={words} />
         </Card>
+        <Card className="card card-half">
+          <AppBar className="population appBar" position="static">
+            <Toolbar>
+              <h1>Population Campare Bar</h1>
+              <IconButton onClick={() => this.handlePopulationRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Population nowPopulation={nowPopulation} futurePopulation={futurePopulation} />
+        </Card>
         <Card className="card card-full">
           <AppBar className="charts appBar" position="static">
             <Toolbar>
-              <h1>Charts</h1>
+              <h1>Insight</h1>
               <IconButton onClick={() => this.handleChartRandom()}>
                 <RefreshIcon />
               </IconButton>
@@ -186,24 +150,10 @@ class App extends Component {
             <AppBar className="menuOne" position="static">
               <Toolbar>
                 <Select
-                  onChange={(event) => this.handleAxisChange('leftAxis', event.target.value)}
+                  onChange={(event) => this.handleAxisChange(event.target.value)}
                   className="selector"
-                  value={leftAxis}
-                  inputProps={{ name: 'leftAxis', id: 'leftAxis'}}
-                >
-                {axises.map(axis => (
-                  <MenuItem key={axis.value} value={axis.value}>{axis.label}</MenuItem>
-                ))}
-                </Select>
-              </Toolbar>
-            </AppBar>
-            <AppBar className="menuTwo" position="static">
-              <Toolbar>
-                <Select
-                  onChange={(event) => this.handleAxisChange('rightAxis', event.target.value)}
-                  className="selector"
-                  value={rightAxis}
-                  inputProps={{ name: 'rightAxis', id: 'rightAxis'}}
+                  value={axis}
+                  inputProps={{ name: 'axis', id: 'axis'}}
                 >
                 {axises.map(axis => (
                   <MenuItem key={axis.value} value={axis.value}>{axis.label}</MenuItem>
@@ -212,7 +162,7 @@ class App extends Component {
               </Toolbar>
             </AppBar>
           </div>
-          <Charts leftAxis={leftAxis} rightAxis={rightAxis} charts={charts} />
+          <Charts axis={axis} charts={charts} />
         </Card>
       </div>
     );
