@@ -38,6 +38,10 @@
   background: #43A047 !important;
 }
 
+.info {
+  background: #039BE5 !important;
+}
+
 .empty {
   background: #B71C1C !important;
 }
@@ -85,4 +89,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   background-color: #fafafa;
+}
+
+.list-container {
+  min-height: 300px;
 }

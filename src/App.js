@@ -6,9 +6,13 @@ import IconButton from '@material-ui/core/IconButton'
 import RefreshIcon from '@material-ui/icons/Refresh'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
 import randomCharts from './utils/random_charts'
 import randomWords from './utils/random_words'
 import randomPopulation from './utils/random_population'
+import faker from 'faker'
 import { axises } from './utils/constants'
 import WordCloud from './components/WordCloud'
 import Population from './components/Population'
@@ -20,12 +24,18 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      name: faker.lorem.slug(),
+      active: faker.random.boolean(),
       leftAxis: 'cpc',
       rightAxis: 'cost',
       charts: randomCharts(),
       words: randomWords(),
       population: randomPopulation()
     }
+  }
+
+  handleInfoRandom () {
+    this.setState((state, props) => ({ ...state, name: faker.lorem.slug(), active: faker.random.boolean() }))
   }
 
   handleChartRandom () {
@@ -45,19 +55,72 @@ class App extends Component {
   }
 
   render () {
-    const { leftAxis, rightAxis, charts, words, population } = this.state
+    const { name, active, leftAxis, rightAxis, charts, words, population } = this.state
     return (
       <div className="pool">
         <Card className="card card-quarter">
-          <AppBar className="cloud appBar" position="static">
+          <AppBar className="info appBar" position="static">
             <Toolbar>
-              <h1>Word Cloud</h1>
-              <IconButton onClick={() => this.handleWordsRandom()}>
+              <h1>Information</h1>
+              <IconButton onClick={() => this.handleInfoRandom()}>
                 <RefreshIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
-          <WordCloud words={words} />
+          <div className="list-container">
+            <List>
+              <ListItem>
+                <ListItemText primary="Name" secondary={name} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="Optimized Action Type" secondary="link_click: Link Clicks" />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="Status" secondary={active ? "Active" : "Pause"} />
+              </ListItem>
+            </List>
+          </div>
+        </Card>
+        <Card className="card card-quarter">
+          <AppBar className="empty appBar" position="static">
+            <Toolbar>
+              <h1>empty</h1>
+              <IconButton onClick={() => {}}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        </Card>
+        <Card className="card card-quarter">
+          <AppBar className="empty appBar" position="static">
+            <Toolbar>
+              <h1>empty</h1>
+              <IconButton onClick={() => {}}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        </Card>
+        <Card className="card card-quarter">
+          <AppBar className="empty appBar" position="static">
+            <Toolbar>
+              <h1>empty</h1>
+              <IconButton onClick={() => {}}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        </Card>
+        <Card className="card card-quarter">
+          <AppBar className="population-group appBar" position="static">
+            <Toolbar>
+              <h1>Population Group</h1>
+              <IconButton onClick={() => this.handlePopulationRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <PopulationGroup population={population} />
         </Card>
         <Card className="card card-half">
           <AppBar className="population appBar" position="static">
@@ -71,15 +134,15 @@ class App extends Component {
           <Population population={population} />
         </Card>
         <Card className="card card-quarter">
-          <AppBar className="population-group appBar" position="static">
+          <AppBar className="cloud appBar" position="static">
             <Toolbar>
-              <h1>Population Group</h1>
-              <IconButton onClick={() => this.handlePopulationRandom()}>
+              <h1>Word Cloud</h1>
+              <IconButton onClick={() => this.handleWordsRandom()}>
                 <RefreshIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
-          <PopulationGroup population={population} />
+          <WordCloud words={words} />
         </Card>
         <Card className="card card-full">
           <AppBar className="charts appBar" position="static">

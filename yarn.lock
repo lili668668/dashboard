@@ -6123,6 +6123,10 @@ react-chartjs-2@^2.7.4:
     lodash "^4.17.4"
     prop-types "^15.5.8"
 
+react-circle@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-circle/-/react-circle-1.1.1.tgz#f97ccf3e2a37a91ea50280ea8262420e0d1de60c"
+
 react-d3-cloud@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-d3-cloud/-/react-d3-cloud-0.6.0.tgz#fb88284457be2baea2d432a80f960db599df8280"
@@ -6131,14 +6135,6 @@ react-d3-cloud@^0.6.0:
     d3-scale "^1.0.6"
     d3-selection "^1.1.0"
     react-faux-dom "^3.0.0"
-
-react-d3-speedometer@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/react-d3-speedometer/-/react-d3-speedometer-0.3.3.tgz#eb55564132917306b5f71cb11ee8cc5655127c02"
-  dependencies:
-    babel-runtime "^6.11.6"
-    d3 "^4.10.0"
-    prop-types "^15.5.10"
 
 "react-d3-speedometer@https://github.com/palerdot/react-d3-speedometer":
   version "0.3.3"
