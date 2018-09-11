@@ -42,6 +42,18 @@
   background: #039BE5 !important;
 }
 
+.tendency {
+  background: #0288D1 !important;
+}
+
+.impression-rate {
+  background: #01579B !important;
+}
+
+.optimized {
+  background: #0277BD !important;
+}
+
 .empty {
   background: #B71C1C !important;
 }
@@ -66,18 +78,19 @@
 
 .card {
   overflow: auto;
+  margin: 1%;
 }
 
 .card-quarter {
-  width: 25%;
+  width: 23%;
 }
 
 .card-half {
-  width: 50%;
+  width: 47%;
 }
 
 .card-full {
-  width: 100%;
+  width: 97%;
 }
 
 .selector {
@@ -91,6 +104,15 @@
   background-color: #fafafa;
 }
 
-.list-container {
-  min-height: 300px;
+.card-content {
+  height: 100%;
+  width: 100%;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.circle-container {
+  height: 60%;
+  width: 60%;
 }

@@ -9,11 +9,16 @@ import MenuItem from '@material-ui/core/MenuItem'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import random from './utils/random'
 import randomCharts from './utils/random_charts'
 import randomWords from './utils/random_words'
 import randomPopulation from './utils/random_population'
 import faker from 'faker'
+import randomTendency from './utils/random_tendency'
 import { axises } from './utils/constants'
+import Tendency from './components/Tendency'
+import Impression from './components/Impression'
+import Optimized from './components/Optimized'
 import WordCloud from './components/WordCloud'
 import Population from './components/Population'
 import PopulationGroup from './components/PopulationGroup'
@@ -30,7 +35,10 @@ class App extends Component {
       rightAxis: 'cost',
       charts: randomCharts(),
       words: randomWords(),
-      population: randomPopulation()
+      population: randomPopulation(),
+      tendency: randomTendency(),
+      impression: Math.round(random(50, 100)),
+      optimized: Math.round(random(50, 100))
     }
   }
 
@@ -50,12 +58,24 @@ class App extends Component {
     this.setState((state, props) => ({ ...state, population: randomPopulation() }))
   }
 
+  handleTendencyRandom () {
+    this.setState((state, props) => ({ ...state, tendency: randomTendency() }))
+  }
+
+  handleImpressionRandom () {
+    this.setState((state, props) => ({ ...state, impression: Math.round(random(50, 100)) }))
+  }
+
+  handleOptimizedRandom () {
+    this.setState((state, props) => ({ ...state, optimized: Math.round(random(50, 100)) }))
+  }
+
   handleAxisChange (axisId, value) {
     this.setState((state, props) => ({ ...state, [axisId]: value }))
   }
 
   render () {
-    const { name, active, leftAxis, rightAxis, charts, words, population } = this.state
+    const { name, active, leftAxis, rightAxis, charts, words, population, tendency, impression, optimized } = this.state
     return (
       <div className="pool">
         <Card className="card card-quarter">
@@ -67,49 +87,58 @@ class App extends Component {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <div className="list-container">
-            <List>
-              <ListItem>
-                <ListItemText primary="Name" secondary={name} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Optimized Action Type" secondary="link_click: Link Clicks" />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Status" secondary={active ? "Active" : "Pause"} />
-              </ListItem>
-            </List>
+          <List>
+            <ListItem>
+              <ListItemText primary="Name" secondary={name} />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="Optimized Action Type" secondary="link_click: Link Clicks" />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="Status" secondary={active ? "Active" : "Pause"} />
+            </ListItem>
+          </List>
+        </Card>
+        <Card className="card card-quarter">
+          <AppBar className="tendency appBar" position="static">
+            <Toolbar>
+              <h1>Delivery Tendency</h1>
+              <IconButton onClick={() => this.handleTendencyRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Tendency tendency={tendency} />
+        </Card>
+        <Card className="card card-quarter">
+          <AppBar className="impression-rate appBar" position="static">
+            <Toolbar>
+              <h1>Impression Rate</h1>
+              <IconButton onClick={() => this.handleImpressionRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <div className="card-content">
+            <div className="circle-container">
+              <Impression impression={impression} />
+            </div>
           </div>
         </Card>
         <Card className="card card-quarter">
-          <AppBar className="empty appBar" position="static">
+          <AppBar className="optimized appBar" position="static">
             <Toolbar>
-              <h1>empty</h1>
-              <IconButton onClick={() => {}}>
+              <h1>Optimize Effectiveness</h1>
+              <IconButton onClick={() => this.handleOptimizedRandom()}>
                 <RefreshIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
-        </Card>
-        <Card className="card card-quarter">
-          <AppBar className="empty appBar" position="static">
-            <Toolbar>
-              <h1>empty</h1>
-              <IconButton onClick={() => {}}>
-                <RefreshIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-        </Card>
-        <Card className="card card-quarter">
-          <AppBar className="empty appBar" position="static">
-            <Toolbar>
-              <h1>empty</h1>
-              <IconButton onClick={() => {}}>
-                <RefreshIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
+          <div className="card-content">
+            <div className="circle-container">
+              <Optimized optimized={optimized} />
+            </div>
+          </div>
         </Card>
         <Card className="card card-quarter">
           <AppBar className="population-group appBar" position="static">
