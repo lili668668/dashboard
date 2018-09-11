@@ -4,15 +4,15 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Card from '@material-ui/core/Card'
 import IconButton from '@material-ui/core/IconButton'
 import RefreshIcon from '@material-ui/icons/Refresh'
-import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import ReactSpeedometer from "react-d3-speedometer"
 import randomCharts from './utils/random_charts'
 import randomWords from './utils/random_words'
-import random from './utils/random'
+import randomPopulation from './utils/random_population'
 import { axises } from './utils/constants'
 import WordCloud from './components/WordCloud'
+import Population from './components/Population'
+import PopulationGroup from './components/PopulationGroup'
 import Charts from './components/Charts'
 import './App.css'
 
@@ -23,7 +23,8 @@ class App extends Component {
       leftAxis: 'cpc',
       rightAxis: 'cost',
       charts: randomCharts(),
-      words: randomWords()
+      words: randomWords(),
+      population: randomPopulation()
     }
   }
 
@@ -35,15 +36,19 @@ class App extends Component {
     this.setState((state, props) => ({ ...state, words: randomWords() }))
   }
 
+  handlePopulationRandom () {
+    this.setState((state, props) => ({ ...state, population: randomPopulation() }))
+  }
+
   handleAxisChange (axisId, value) {
     this.setState((state, props) => ({ ...state, [axisId]: value }))
   }
 
   render () {
-    const { leftAxis, rightAxis, charts, words } = this.state
+    const { leftAxis, rightAxis, charts, words, population } = this.state
     return (
       <div className="pool">
-        <Card className="card-half">
+        <Card className="card card-quarter">
           <AppBar className="cloud appBar" position="static">
             <Toolbar>
               <h1>Word Cloud</h1>
@@ -54,25 +59,29 @@ class App extends Component {
           </AppBar>
           <WordCloud words={words} />
         </Card>
-        <Card className="card-quarter">
-          <AppBar className="sppedomater appBar" position="static">
+        <Card className="card card-half">
+          <AppBar className="population appBar" position="static">
             <Toolbar>
-              <h1>Word Cloud</h1>
-              <IconButton onClick={() => this.handleWordsRandom()}>
+              <h1>Population</h1>
+              <IconButton onClick={() => this.handlePopulationRandom()}>
                 <RefreshIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
-          <ReactSpeedometer
-            value={random(0, 100)}
-            minValue={0}
-            maxValue={100}
-            segments={5}
-            fluidWidth={true}
-            needleTransitionDuration={3000}
-          />
+          <Population population={population} />
         </Card>
-        <Card className="card-full">
+        <Card className="card card-quarter">
+          <AppBar className="population-group appBar" position="static">
+            <Toolbar>
+              <h1>Population Group</h1>
+              <IconButton onClick={() => this.handlePopulationRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <PopulationGroup population={population} />
+        </Card>
+        <Card className="card card-full">
           <AppBar className="charts appBar" position="static">
             <Toolbar>
               <h1>Charts</h1>

@@ -9,14 +9,16 @@ function random_words () {
   const jobType = faker.name.jobType()
   const sex = random(0, 2) === 0 ? 'male' : 'female'
   const old = `${Math.round(random(0, 100))} old`
+  const min = 20
+  const max = 40
   return [
-    { text: city, value: random(40, 60) },
-    { text: country, value: random(40, 60) },
-    { text: state, value: random(40, 60) },
-    { text: jobTitle, value: random(40, 60) },
-    { text: jobType, value: random(40, 60) },
-    { text: sex, value: random(40, 60) },
-    { text: old, value: random(40, 60) },
+    { text: city, value: random(min, max) },
+    { text: country, value: random(min, max) },
+    { text: state, value: random(min, max) },
+    { text: jobTitle, value: random(min, max) },
+    { text: jobType, value: random(min, max) },
+    { text: sex, value: random(min, max) },
+    { text: old, value: random(min, max) },
   ]
 }
 

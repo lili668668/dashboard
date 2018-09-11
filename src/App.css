@@ -27,10 +27,18 @@
 }
 
 .cloud {
-  background: #F44336 !important;
+  background: #43A047 !important;
 }
 
-.sppedomater {
+.population {
+  background: #2E7D32 !important;
+}
+
+.population-group {
+  background: #43A047 !important;
+}
+
+.empty {
   background: #B71C1C !important;
 }
 
@@ -50,6 +58,10 @@
   background: #BBDEFB !important;
   flex: 1 1 auto !important;
   box-shadow: none !important;
+}
+
+.card {
+  overflow: auto;
 }
 
 .card-quarter {

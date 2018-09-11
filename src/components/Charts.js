@@ -9,7 +9,7 @@ class App extends Component {
       <ResponsiveContainer height={300} width="100%">
         <LineChart data={charts} margin={{ left: 50, right: 50, top: 30, bottom: 30 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="hour" />
+          <XAxis dataKey="hour" label={{ value: 'hours', position: 'insideBottom' }} />
           <YAxis yAxisId={leftAxis} orientation="left" label={{ value: axises.find(axis => axis.value === leftAxis).label, position: 'left', offset: -10 }} />
           <YAxis yAxisId={rightAxis} orientation="right" label={{ value: axises.find(axis => axis.value === rightAxis).label, position: 'right', offset: -10 }} />
           <Tooltip />

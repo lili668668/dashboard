@@ -9,15 +9,13 @@
     "chart.js": "^1.1.1",
     "faker": "^4.1.0",
     "gh-pages": "^1.2.0",
-    "material-design-icons": "^3.0.1",
     "react": "^16.4.1",
     "react-chartjs-2": "^2.7.4",
     "react-d3-cloud": "^0.6.0",
-    "react-d3-speedometer": "^0.3.3",
+    "react-d3-speedometer": "https://github.com/palerdot/react-d3-speedometer",
     "react-dom": "^16.4.1",
     "react-liquid-gauge": "^1.2.4",
     "react-scripts": "1.1.4",
-    "react-toolbox": "^2.0.0-beta.13",
     "recharts": "^1.2.0"
   },
   "scripts": {
