@@ -9,12 +9,18 @@ import MenuItem from '@material-ui/core/MenuItem'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import {
+  SortingState,
+  IntegratedSorting,
+} from '@devexpress/dx-react-grid';
+import { Grid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-material-ui'
 import random from './utils/random'
 import randomCharts from './utils/random_charts'
 import randomWords from './utils/random_words'
 import randomPopulation from './utils/random_population'
+import randomList from './utils/random_list'
+import { columns, extensions } from './utils/constants'
 import faker from 'faker'
-import randomTendency from './utils/random_tendency'
 import { axises } from './utils/constants'
 import Optimized from './components/Optimized'
 import WordCloud from './components/WordCloud'
@@ -22,6 +28,18 @@ import Population from './components/Population'
 import PopulationGroup from './components/PopulationGroup'
 import Charts from './components/Charts'
 import './App.css'
+
+const processList = (list) => {
+  return list
+    .map((entry) => {
+      return Object.keys(entry)
+        .map(key => {
+          if (Array.isArray(entry[key])) return ({ [key]: entry[key].join(', ') })
+          return entry
+        })
+        .reduce((collection ,entry) => Object.assign({}, collection, entry), {})
+    })
+}
 
 class App extends Component {
   constructor (props) {
@@ -34,9 +52,9 @@ class App extends Component {
       words: randomWords(),
       nowPopulation: randomPopulation(),
       futurePopulation: randomPopulation(),
-      tendency: randomTendency(),
       impression: Math.round(random(50, 100)),
-      optimized: Math.round(random(50, 100))
+      optimized: Math.round(random(50, 100)),
+      list: randomList()
     }
   }
 
@@ -60,12 +78,17 @@ class App extends Component {
     this.setState((state, props) => ({ ...state, optimized: Math.round(random(50, 100)) }))
   }
 
+  handleListRandom () {
+    this.setState((state, props) => ({ ...state, list: randomList() }))
+  }
+
   handleAxisChange (value) {
     this.setState((state, props) => ({ ...state, axis: value }))
   }
 
   render () {
-    const { name, active, axis, charts, words, nowPopulation, futurePopulation, optimized } = this.state
+    const { name, active, axis, charts, words, nowPopulation, futurePopulation, optimized, list } = this.state
+    const proccessedList = processList(list)
     return (
       <div className="pool">
         <Card className="card card-quarter">
@@ -105,17 +128,6 @@ class App extends Component {
           </div>
         </Card>
         <Card className="card card-half">
-          <AppBar className="population-group appBar" position="static">
-            <Toolbar>
-              <h1>Population Campare Pie</h1>
-              <IconButton onClick={() => this.handlePopulationRandom()}>
-                <RefreshIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <PopulationGroup nowPopulation={nowPopulation} futurePopulation={futurePopulation} />
-        </Card>
-        <Card className="card card-half">
           <AppBar className="cloud appBar" position="static">
             <Toolbar>
               <h1>Suggest Word</h1>
@@ -125,6 +137,40 @@ class App extends Component {
             </Toolbar>
           </AppBar>
           <WordCloud words={words} />
+        </Card>
+        <Card className="card card-full">
+          <AppBar className="list appBar" position="static">
+            <Toolbar>
+              <h1>Suggest List</h1>
+              <IconButton onClick={() => this.handleListRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Grid
+            rows={proccessedList}
+            columns={columns}
+          >
+            <SortingState
+              defaultSorting={[{ columnName: 'score', direction: 'desc' }]}
+            />
+            <IntegratedSorting />
+            <Table
+              columnExtensions={extensions}
+            />
+            <TableHeaderRow />
+          </Grid>
+        </Card>
+        <Card className="card card-half">
+          <AppBar className="population-group appBar" position="static">
+            <Toolbar>
+              <h1>Population Campare Pie</h1>
+              <IconButton onClick={() => this.handlePopulationRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <PopulationGroup nowPopulation={nowPopulation} futurePopulation={futurePopulation} />
         </Card>
         <Card className="card card-half">
           <AppBar className="population appBar" position="static">

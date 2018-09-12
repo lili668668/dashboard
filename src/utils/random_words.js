@@ -8,7 +8,7 @@ function random_words () {
     const state = faker.address.state()
     const jobTitle = faker.name.jobTitle()
     const jobType = faker.name.jobType()
-    const sex = random(0, 2) === 0 ? 'male' : 'female'
+    const sex =  faker.random.boolean() ? 'male' : 'female'
     const old = `${Math.round(random(0, 100))} old`
     const min = 20
     const max = 40

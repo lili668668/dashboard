@@ -27,15 +27,15 @@
 }
 
 .cloud {
-  background: #43A047 !important;
+  background: #039BE5 !important;
 }
 
 .population {
-  background: #43A047 !important;
+  background: #FF5722 !important;
 }
 
 .population-group {
-  background: #43A047 !important;
+  background: #FF5722 !important;
 }
 
 .info {
@@ -52,6 +52,10 @@
 
 .optimized {
   background: #039BE5 !important;
+}
+
+.list {
+  background: #43A047 !important;
 }
 
 .empty {
