@@ -14,6 +14,7 @@ import {
   IntegratedSorting,
 } from '@devexpress/dx-react-grid';
 import { Grid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-material-ui'
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 import random from './utils/random'
 import randomCharts from './utils/random_charts'
 import randomWords from './utils/random_words'
@@ -30,15 +31,21 @@ import Charts from './components/Charts'
 import './App.css'
 
 const processList = (list) => {
-  return list
+  let cnt = 1
+  const tmp = list
     .map((entry) => {
-      return Object.keys(entry)
+      const newEntry = Object.keys(entry)
         .map(key => {
           if (Array.isArray(entry[key])) return ({ [key]: entry[key].join(', ') })
           return entry
         })
-        .reduce((collection ,entry) => Object.assign({}, collection, entry), {})
+        .reduce((collection, entry) => Object.assign({}, collection, entry), {})
+      newEntry.id = `${cnt}`
+      cnt++
+      return newEntry
     })
+  console.log(tmp)
+  return tmp
 }
 
 class App extends Component {
@@ -138,7 +145,37 @@ class App extends Component {
           </AppBar>
           <WordCloud words={words} />
         </Card>
-        <Card className="card card-full">
+        <Card className="card card-half">
+          <AppBar className="list appBar" position="static">
+            <Toolbar>
+              <h1>Suggest Bar</h1>
+              <IconButton onClick={() => this.handleListRandom()}>
+                <RefreshIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <ResponsiveContainer height={300} width="100%">
+            <BarChart data={proccessedList} margin={{ left: 50, right: 50, top: 30, bottom: 30 }} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" />
+              <YAxis type="category" dataKey="id" />
+              <Tooltip content={(object) => {
+                const entry = proccessedList.find(({ id }) => id === object.label)
+                if (!entry) return null
+                return (
+                  <div style={{ width: 400, overflowWrap: 'break-word', wordBreak: 'break-all' }}>
+                  {
+                    Object.keys(entry).map(key => (<div style={{ color: '#F44336' }} key={key}>{`${key}: ${entry[key]}`}</div>))
+                  }
+                  </div>
+                )
+              }} />
+              <Legend />
+              <Bar dataKey="score" fill="#C8E6C9" />
+            </BarChart>
+          </ResponsiveContainer>
+        </Card>
+        <Card className="card card-half">
           <AppBar className="list appBar" position="static">
             <Toolbar>
               <h1>Suggest List</h1>

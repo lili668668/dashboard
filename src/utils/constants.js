@@ -5,6 +5,7 @@ const axises = [
 ]
 
 const columns = [
+  { name: 'id', title: 'ID' },
   { name: 'score', title: 'Score' },
   { name: 'gender', title: 'Gender' },
   { name: 'age_range', title: 'Age Range' },
